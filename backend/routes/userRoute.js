@@ -1,19 +1,48 @@
+// import express from "express";
+// import { loginUser, registerUser } from "../controllers/userController.js";
+// import authMiddleware from "../middleware/authMiddleware.js";
+
+// const userRouter = express.Router();
+
+// // public routes
+// userRouter.post("/register", registerUser);
+// userRouter.post("/login", loginUser);
+
+// // protected route
+// userRouter.get("/me", authMiddleware, (req, res) => {
+//   res.status(200).json({
+//     success: true,
+//     user: req.user,
+//   });
+// });
+
+// export default userRouter;
+
 import express from "express";
 import { loginUser, registerUser } from "../controllers/userController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
 const userRouter = express.Router();
 
-// public routes
+/* =========================
+   PUBLIC ROUTES
+========================= */
 userRouter.post("/register", registerUser);
 userRouter.post("/login", loginUser);
 
-// protected route
+/* =========================
+   PROTECTED ROUTE (GET ME)
+========================= */
 userRouter.get("/me", authMiddleware, (req, res) => {
   res.status(200).json({
     success: true,
-    user: req.user,
+    user: {
+      _id: req.user._id,
+      email: req.user.email,
+      role: req.user.role,
+    },
   });
 });
 
 export default userRouter;
+

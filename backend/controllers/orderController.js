@@ -541,17 +541,45 @@ const userOrders = async (req, res) => {
 /* =========================
    ADMIN: LIST ORDERS
 ========================= */
+// const listOrders = async (req, res) => {
+//   try {
+//     const orders = await orderModel.find({}).sort({ createdAt: -1 });
+//     res.json({
+//       success: true,
+//       data: orders,
+//     });
+//   } catch (error) {
+//     res.json({ success: false });
+//   }
+// };
+
 const listOrders = async (req, res) => {
   try {
-    const orders = await orderModel.find({}).sort({ createdAt: -1 });
+    // 🔐 Admin-only access
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        success: false,
+        message: "Access denied",
+      });
+    }
+
+    const orders = await orderModel
+      .find({})
+      .sort({ createdAt: -1 });
+
     res.json({
       success: true,
       data: orders,
     });
   } catch (error) {
-    res.json({ success: false });
+    console.error("List Orders Error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch orders",
+    });
   }
 };
+
 
 /* =========================
    ADMIN: UPDATE STATUS
