@@ -260,64 +260,134 @@ const StoreContextProvider = ({ children }) => {
   /* =========================
      ADD TO CART
   ========================= */
+  // const addToCart = async (itemId) => {
+  //   setCartItems((prev) => ({
+  //     ...prev,
+  //     [itemId]: (prev[itemId] || 0) + 1,
+  //   }));
+
+  //   if (!token) return;
+
+  //   try {
+  //     const res = await axios.post(
+  //       `${url}/api/cart/add`,
+  //       { itemId },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (!res.data.success) {
+  //       toast.error("Failed to add item to cart");
+  //     }
+  //   } catch (error) {
+  //     toast.error("Server error while adding item");
+  //     console.error(error);
+  //   }
+  // };
+
   const addToCart = async (itemId) => {
-    setCartItems((prev) => ({
-      ...prev,
-      [itemId]: (prev[itemId] || 0) + 1,
-    }));
+  setCartItems((prev) => ({
+    ...prev,
+    [itemId]: (prev[itemId] || 0) + 1,
+  }));
 
-    if (!token) return;
+  if (!token) {
+    toast.info("Please login to add items to cart");
+    return;
+  }
 
-    try {
-      const res = await axios.post(
-        `${url}/api/cart/add`,
-        { itemId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!res.data.success) {
-        toast.error("Failed to add item to cart");
+  try {
+    const res = await axios.post(
+      `${url}/api/cart/add`,
+      { itemId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
-    } catch (error) {
-      toast.error("Server error while adding item");
-      console.error(error);
+    );
+
+    if (res.data.success) {
+      toast.success("Item added to cart 🛒");
+    } else {
+      toast.error("Failed to add item to cart");
     }
-  };
+  } catch (error) {
+    toast.error("Server error while adding item");
+    console.error(error);
+  }
+};
 
   /* =========================
      REMOVE FROM CART
   ========================= */
+  // const removeFromCart = async (itemId) => {
+  //   setCartItems((prev) => {
+  //     const updated = { ...prev };
+  //     if (!updated[itemId]) return updated;
+
+  //     updated[itemId] -= 1;
+  //     if (updated[itemId] <= 0) delete updated[itemId];
+  //     return updated;
+  //   });
+
+  //   if (!token) return;
+
+  //   try {
+  //     await axios.post(
+  //       `${url}/api/cart/remove`,
+  //       { itemId },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //   } catch (error) {
+  //     toast.error("Server error while removing item");
+  //     console.error(error);
+  //   }
+  // };
+
   const removeFromCart = async (itemId) => {
-    setCartItems((prev) => {
-      const updated = { ...prev };
-      if (!updated[itemId]) return updated;
+  setCartItems((prev) => {
+    const updated = { ...prev };
+    if (!updated[itemId]) return updated;
 
-      updated[itemId] -= 1;
-      if (updated[itemId] <= 0) delete updated[itemId];
-      return updated;
-    });
+    updated[itemId] -= 1;
+    if (updated[itemId] <= 0) delete updated[itemId];
+    return updated;
+  });
 
-    if (!token) return;
+  if (!token) {
+    toast.info("Please login to modify cart");
+    return;
+  }
 
-    try {
-      await axios.post(
-        `${url}/api/cart/remove`,
-        { itemId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (error) {
-      toast.error("Server error while removing item");
-      console.error(error);
+  try {
+    const res = await axios.post(
+      `${url}/api/cart/remove`,
+      { itemId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (res.data.success) {
+      toast.success("Item removed from cart 🗑️");
+    } else {
+      toast.error("Failed to remove item");
     }
-  };
+  } catch (error) {
+    toast.error("Server error while removing item");
+    console.error(error);
+  }
+};
 
   /* =========================
      TOTAL CART AMOUNT

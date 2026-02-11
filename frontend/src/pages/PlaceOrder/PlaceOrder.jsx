@@ -387,6 +387,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
+
+// console.log("STRIPE KEY:", process.env.STRIPE_SECRET_KEY);
+
+
 const PlaceOrder = () => {
   const navigate = useNavigate();
   const { getTotalCartAmount, token, food_list, cartItems, url } =
@@ -417,7 +421,7 @@ const PlaceOrder = () => {
     food_list.forEach((item) => {
       if (cartItems[item._id] > 0) {
         orderItems.push({
-          _id: item._id,
+          productId: item._id,
           quantity: cartItems[item._id],
         });
       }
