@@ -4,7 +4,9 @@ import {
   removeFromCart,
   getCart,
 } from "../controllers/cartController.js";
-import authMiddleware from "../middleware/auth.js";
+// import authMiddleware from "../middleware/auth.js";
+import authMiddleware from "../middleware/authMiddleware.js";
+
 
 const cartRouter = express.Router();
 
