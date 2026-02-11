@@ -99,13 +99,13 @@ Start the Backend server
 Start the Frontend server
 
 ```bash
-    npm start
+    npm run dev
 ```
 
 Start the Backend server
 
 ```bash
-    npm start
+    npm run server
 ```
 ## Tech Stack
 * [React](https://reactjs.org/)
@@ -125,6 +125,6 @@ The application is deployed on Render.
 Contributions are always welcome!
 Just raise an issue, and we will discuss it.
 
-## Feedback
+<!-- ## Feedback
 
-If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/muhammad-shan-full-stack-developer/)
+If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/muhammad-shan-full-stack-developer/) -->
