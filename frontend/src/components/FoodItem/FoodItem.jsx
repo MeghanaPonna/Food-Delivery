@@ -51,7 +51,7 @@ const FoodItem = ({ id, name, price, description, image }) => {
   if (!id) return null; // extra safety
 
   return (
-    <div className="food-item">
+    <div className="food-item menu-item">
       <div className="food-item-img-container">
         <img
           src={`${url}/images/${image}`}

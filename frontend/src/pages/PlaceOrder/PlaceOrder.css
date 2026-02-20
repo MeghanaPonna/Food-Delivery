@@ -1,4 +1,4 @@
-.place-order{
+/* .place-order{
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -41,4 +41,133 @@
     .place-order-left .title{
         font-size: 27px;
     }
+} */
+
+/* Page Layout */
+.place-order {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  margin: 80px auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+/* ---------------- LEFT SECTION ---------------- */
+.place-order-left {
+  flex: 1;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.place-order-left .title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #222;
+}
+
+/* Inputs */
+.place-order-left input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.place-order-left input:focus {
+  border-color: tomato;
+  box-shadow: 0 0 0 2px rgba(255, 99, 71, 0.15);
+}
+
+/* Two-column inputs */
+.place-order-left .multi-fields {
+  display: flex;
+  gap: 15px;
+}
+
+/* ---------------- RIGHT SECTION ---------------- */
+.place-order-right {
+  flex: 0.8;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  height: fit-content;
+}
+
+/* Total */
+.place-order-right h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* Payment Button */
+.place-order-right button {
+  width: 100%;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: tomato;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.place-order-right button:hover {
+  background: #e63900;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 99, 71, 0.35);
+}
+
+/* Active */
+.place-order-right button:active {
+  transform: scale(0.98);
+}
+
+/* Disabled (future-safe) */
+.place-order-right button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 900px) {
+  .place-order {
+    flex-direction: column;
+    gap: 40px;
+    margin: 40px auto;
+  }
+
+  .place-order-left,
+  .place-order-right {
+    padding: 25px;
+  }
+
+  .place-order-left .title {
+    font-size: 24px;
+  }
+
+  .place-order-right h2 {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 500px) {
+  .place-order-left .multi-fields {
+    flex-direction: column;
+  }
 }
