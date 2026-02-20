@@ -1,0 +1,63 @@
+.admin-offers {
+  padding: 40px;
+}
+
+.admin-offers h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
+/* -------- FORM -------- */
+.offer-form {
+  max-width: 420px;
+  display: grid;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.offer-form input,
+.offer-form select {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.offer-form button {
+  background: tomato;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.offer-form button:hover {
+  background: #e63900;
+}
+
+/* -------- OFFER LIST -------- */
+.offer-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.offer-card {
+  border: 1px solid #ffd1c7;
+  padding: 20px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+}
+
+.offer-card h3 {
+  color: tomato;
+  margin-bottom: 8px;
+}
+
+.offer-card p {
+  font-size: 14px;
+  margin: 4px 0;
+}

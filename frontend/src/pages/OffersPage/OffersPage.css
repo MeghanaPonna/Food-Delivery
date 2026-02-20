@@ -1,0 +1,101 @@
+.offers-page {
+  padding: 40px 8%;
+  min-height: 80vh;
+  background: #fafafa;
+}
+
+.offers-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.offers-loading,
+.offers-empty {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.offer-card {
+  background: white;
+  border-radius: 14px;
+  padding: 25px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.offer-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: tomato;
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.offer-code {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.offer-discount {
+  font-size: 20px;
+  font-weight: 600;
+  color: tomato;
+  margin-bottom: 8px;
+}
+
+.offer-min,
+.offer-expiry {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.offer-copy {
+  margin-top: 14px;
+  width: 100%;
+  padding: 10px 0;
+  border: none;
+  border-radius: 8px;
+  background: tomato;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.offer-copy:hover {
+  background: #e13b1f;
+}
+
+@media (max-width: 600px) {
+  .offers-page {
+    padding: 25px 5%;
+  }
+
+  .offers-title {
+    font-size: 26px;
+  }
+}

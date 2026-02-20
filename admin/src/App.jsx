@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./components/Login/Login";
 import AdminRoute from "./components/AdminRoute";
+import Offers from "./pages/Offers/Offers";
 
 const App = () => {
   const url = "http://localhost:4000";
@@ -19,16 +20,45 @@ const App = () => {
       <hr />
       <div className="app-content">
         <Sidebar />
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Login url={url}/>} />
           <Route path="/add" element={<Add url={url}/>} />
           <Route path="/list" element={<List url={url}/>} />
+          <Route path="/offers" element={<Offers />} />
           <Route path="/orders" element={<Orders url={url}/>} />
           <Route path="/orders" element={ <AdminRoute>
              <Orders url={url} />
             </AdminRoute>}
           />
-        </Routes>
+        </Routes> */}
+
+        <Routes>
+            <Route path="/" element={<Login url={url} />} />
+
+            <Route path="/add" element={
+              <AdminRoute>
+                <Add url={url} />
+              </AdminRoute>
+            } />
+
+            <Route path="/list" element={
+              <AdminRoute>
+                <List url={url} />
+              </AdminRoute>
+            } />
+
+            <Route path="/offers" element={
+              <AdminRoute>
+                <Offers />
+              </AdminRoute>
+            } />
+
+            <Route path="/orders" element={
+              <AdminRoute>
+                <Orders url={url} />
+              </AdminRoute>
+            } />
+         </Routes>
       </div>
     </div>
   );
