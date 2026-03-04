@@ -219,7 +219,7 @@ const Orders = ({ url }) => {
               </div>
 
               <p>Items: {order.items.length}</p>
-              <p>${order.amount}</p>
+              <p>₹{order.amount}</p>
 
               <select
                 value={order.status}
