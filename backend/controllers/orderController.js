@@ -431,7 +431,7 @@ import foodModel from "../models/foodModel.js";
 import Offer from "../models/offerModel.js";
 import Stripe from "stripe";
 
-const frontend_url = "http://localhost:5174";
+const frontend_url = "http://localhost:5173";
 
 /* =========================
    PLACE ORDER (USER)
@@ -511,34 +511,69 @@ const placeOrder = async (req, res) => {
     let discounts = [];
 
     /* ---------- COUPON (SECURE BACKEND CHECK) ---------- */
+    // if (coupon) {
+    //   const offer = await Offer.findOne({
+    //     code: coupon.toUpperCase(),
+    //     active: true,
+    //     expiryDate: { $gte: new Date() },
+    //   });
+
+    //   if (offer && finalAmount >= offer.minAmount) {
+    //     discountAmount =
+    //       offer.discountType === "percentage"
+    //         ? Math.round((subtotal * offer.discountValue) / 100)
+    //         : offer.discountValue;
+
+    //     discountAmount = Math.min(discountAmount, subtotal);
+    //     finalAmount -= discountAmount;
+
+    //     // ✅ Stripe-approved discount (NO negative amounts)
+    //     const stripeCoupon = await stripe.coupons.create({
+    //       amount_off: discountAmount * 100,
+    //       currency: "inr",
+    //       name: `Coupon ${offer.code}`,
+    //     });
+
+    //     discounts.push({
+    //       coupon: stripeCoupon.id,
+    //     });
+    //   }
+    // }
+
+
     if (coupon) {
-      const offer = await Offer.findOne({
-        code: coupon.toUpperCase(),
-        active: true,
-        expiryDate: { $gte: new Date() },
-      });
 
-      if (offer && finalAmount >= offer.minAmount) {
-        discountAmount =
-          offer.discountType === "percentage"
-            ? Math.round((subtotal * offer.discountValue) / 100)
-            : offer.discountValue;
+  const today = new Date();
+  today.setHours(0,0,0,0);
 
-        discountAmount = Math.min(discountAmount, subtotal);
-        finalAmount -= discountAmount;
+  const offer = await Offer.findOne({
+    code: coupon.toUpperCase(),
+    active: true,
+    expiryDate: { $gte: today },
+  });
 
-        // ✅ Stripe-approved discount (NO negative amounts)
-        const stripeCoupon = await stripe.coupons.create({
-          amount_off: discountAmount * 100,
-          currency: "inr",
-          name: `Coupon ${offer.code}`,
-        });
+  if (offer && finalAmount >= offer.minAmount) {
 
-        discounts.push({
-          coupon: stripeCoupon.id,
-        });
-      }
-    }
+    discountAmount =
+      offer.discountType === "percentage"
+        ? Math.round((subtotal * offer.discountValue) / 100)
+        : offer.discountValue;
+
+    discountAmount = Math.min(discountAmount, subtotal);
+    finalAmount -= discountAmount;
+
+    const stripeCoupon = await stripe.coupons.create({
+      amount_off: discountAmount * 100,
+      currency: "inr",
+      name: `Coupon ${offer.code}`,
+    });
+
+    discounts.push({
+      coupon: stripeCoupon.id,
+    });
+  }
+}
+
 
     /* ---------- STRIPE MINIMUM ---------- */
     if (finalAmount < 50) {

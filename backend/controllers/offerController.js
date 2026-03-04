@@ -46,7 +46,8 @@ export const addOffer = async (req, res) => {
       discountType,
       discountValue,
       minAmount,
-      expiryDate,
+      // expiryDate,
+      expiryDate: new Date(expiryDate),
     });
 
     res.status(201).json({
@@ -193,22 +194,160 @@ export const getOffers = async (req, res) => {
 /* ======================
    APPLY OFFER (USER)
 ====================== */
+// export const applyOffer = async (req, res) => {
+//   try {
+//     const { code, items } = req.body;
+
+//     if (!code || !items || items.length === 0) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid coupon request",
+//       });
+//     }
+
+//     // 🔹 Find offer
+//     const offer = await Offer.findOne({
+//       code: code.toUpperCase(),
+//       active: true,
+//       expiryDate: { $gte: new Date() },
+//     });
+
+//     if (!offer) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid or expired coupon",
+//       });
+//     }
+
+//     // 🔹 Calculate subtotal
+//     let subtotal = 0;
+
+//     for (const item of items) {
+//       const product = await foodModel.findById(item.productId);
+//       if (!product) continue;
+
+//       subtotal += product.price * item.quantity;
+//     }
+
+//     if (subtotal < offer.minAmount) {
+//       return res.status(400).json({
+//         success: false,
+//         message: `Minimum order ₹${offer.minAmount} required`,
+//       });
+//     }
+
+//     // 🔹 Calculate discount
+//     let discount =
+//       offer.discountType === "percentage"
+//         ? Math.round((subtotal * offer.discountValue) / 100)
+//         : offer.discountValue;
+
+//     discount = Math.min(discount, subtotal);
+
+//     const DELIVERY_FEE = 2;
+//     const total = subtotal + DELIVERY_FEE - discount;
+
+//     res.json({
+//       success: true,
+//       discount,
+//       total,
+//       // coupon: offer.code,
+//     });
+//   } catch (error) {
+//     console.error("Apply Offer Error:", error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to apply coupon",
+//     });
+//   }
+// };
+
+
+// export const applyOffer = async (req, res) => {
+//   try {
+//     const { code, items } = req.body;
+
+//     if (!code || !items?.length) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid coupon request",
+//       });
+//     }
+
+//     console.log("Checking coupon:", code);
+
+//     const offer = await Offer.findOne({
+//       code: code.toUpperCase(),
+//       expiryDate: { $gte: new Date() },
+//     });
+
+//     if (!offer) {
+//       return res.status(400).json({
+//         success: false,
+//         message: "Invalid or expired coupon",
+//       });
+//     }
+
+//     let subtotal = 0;
+
+//     for (const item of items) {
+//       const product = await foodModel.findById(item.productId || item._id);
+//       if (!product) continue;
+
+//       subtotal += product.price * item.quantity;
+//     }
+
+//     if (subtotal < offer.minAmount) {
+//       return res.status(400).json({
+//         success: false,
+//         message: `Minimum order ₹${offer.minAmount} required`,
+//       });
+//     }
+
+//     let discount =
+//       offer.discountType === "percentage"
+//         ? (subtotal * offer.discountValue) / 100
+//         : offer.discountValue;
+
+//     discount = Math.min(discount, subtotal);
+
+//     const DELIVERY_FEE = 2;
+//     const total = subtotal + DELIVERY_FEE - discount;
+
+//     res.json({
+//       success: true,
+//       discount,
+//       total,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Failed to apply coupon",
+//     });
+//   }
+// };
+
+
+
 export const applyOffer = async (req, res) => {
   try {
     const { code, items } = req.body;
 
-    if (!code || !items || items.length === 0) {
+    if (!code || !items?.length) {
       return res.status(400).json({
         success: false,
         message: "Invalid coupon request",
       });
     }
 
-    // 🔹 Find offer
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
     const offer = await Offer.findOne({
       code: code.toUpperCase(),
       active: true,
-      expiryDate: { $gte: new Date() },
+      expiryDate: { $gte: today },
     });
 
     if (!offer) {
@@ -218,11 +357,10 @@ export const applyOffer = async (req, res) => {
       });
     }
 
-    // 🔹 Calculate subtotal
     let subtotal = 0;
 
     for (const item of items) {
-      const product = await foodModel.findById(item.productId);
+      const product = await foodModel.findById(item.productId || item._id);
       if (!product) continue;
 
       subtotal += product.price * item.quantity;
@@ -235,7 +373,6 @@ export const applyOffer = async (req, res) => {
       });
     }
 
-    // 🔹 Calculate discount
     let discount =
       offer.discountType === "percentage"
         ? Math.round((subtotal * offer.discountValue) / 100)
@@ -250,7 +387,7 @@ export const applyOffer = async (req, res) => {
       success: true,
       discount,
       total,
-      // coupon: offer.code,
+      coupon: offer.code,
     });
   } catch (error) {
     console.error("Apply Offer Error:", error);
@@ -260,3 +397,5 @@ export const applyOffer = async (req, res) => {
     });
   }
 };
+
+
