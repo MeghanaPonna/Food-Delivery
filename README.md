@@ -1,130 +1,197 @@
-# TOMATO - Food Ordering Website
+# 🍔 Food Delivery System
 
-This repository hosts the source code for TOMATO, a dynamic food ordering website built with the MERN Stack. It offers a user-friendly platform for seamless online food ordering.
+A **full-stack MERN Food Delivery application** that allows users to browse food items, add them to cart, apply coupons, place orders, and complete payments securely using **Stripe**.
 
-## Demo
+The system also includes an **Admin Panel** for managing food items, orders, and offers.
 
-- User Panel: [https://food-delivery-frontend-s2l9.onrender.com/](https://food-delivery-frontend-s2l9.onrender.com/)
-- Admin Panel: [https://food-delivery-admin-wrme.onrender.com/](https://food-delivery-admin-wrme.onrender.com/)
+---
 
-## Features
+# 🚀 Features
 
-- User Panel
-- Admin Panel
-- JWT Authentication
-- Password Hashing with Bcrypt
-- Stripe Payment Integration
-- Login/Signup
-- Logout
-- Add to Cart
-- Place Order
-- Order Management
-- Products Management
-- Filter Food Products
-- Login/Signup
-- Authenticated APIs
-- REST APIs
-- Role-Based Identification
-- Beautiful Alerts
+### 👤 User Side
 
-## Screenshots
+* Browse food menu
+* Filter by categories
+* Add / remove items from cart
+* Apply **coupon codes**
+* Secure **Stripe payment integration**
+* Checkout with delivery information
+* View order history
 
-![Hero](https://i.ibb.co/59cwY75/food-hero.png)
-- Hero Section
+### 🛒 Cart System
 
-![Products](https://i.ibb.co/JnNQPyQ/food-products.png)
-- Products Section
+* Dynamic cart updates
+* Automatic total calculation
+* Delivery fee calculation
+* Coupon discount support
 
-![Cart](https://i.ibb.co/t2LrQ8p/food-cart.png)
-- Cart Page
+### 💳 Payment
 
-![Login](https://i.ibb.co/s6PgwkZ/food-login.png)
-- Login Popup
+* Integrated **Stripe Payment Gateway**
+* Secure checkout
+* Payment session handling
 
-## Run Locally
+### 🎟 Coupon System
 
-Clone the project
+* Apply promo codes
+* Discount calculation
+* Validations for invalid coupons
+
+### 🧑‍💼 Admin Panel
+
+Admin dashboard for managing the platform.
+
+Admin can:
+
+* Add new food items
+* View food list
+* Manage orders
+* Update order status
+* Manage coupons/offers
+
+---
+
+# 🏗️ Tech Stack
+
+### Frontend
+
+* React.js
+* React Router
+* Context API
+* Axios
+* CSS
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+
+### Payment
+
+* Stripe API
+
+### Authentication
+
+* JWT Authentication
+* Protected APIs
+
+---
+
+# 📂 Project Structure
+
+```
+Food-Delivery
+│
+├── backend
+│   ├── controllers
+│   ├── models
+│   ├── routes
+│   ├── middleware
+│   └── server.js
+│
+├── frontend
+│   ├── components
+│   ├── pages
+│   ├── context
+│   └── App.jsx
+│
+├── admin
+│   ├── components
+│   ├── pages
+│   └── App.jsx
+```
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
 
 ```bash
-    git clone https://github.com/Mshandev/Food-Delivery
+git clone https://github.com/MeghanaPonna/Food-Delivery.git
 ```
-Go to the project directory
+
+---
+
+# ▶️ Running the Project
+
+### 1️⃣ Start Backend
 
 ```bash
-    cd Food-Delivery
+cd backend
+npm install
+npm run server
 ```
-Install dependencies (frontend)
+
+---
+
+### 2️⃣ Start Frontend
 
 ```bash
-    cd frontend
-    npm install
+cd frontend
+npm install
+npm run dev
 ```
-Install dependencies (admin)
+
+---
+
+### 3️⃣ Start Admin Panel
 
 ```bash
-    cd admin
-    npm install
-```
-Install dependencies (backend)
-
-```bash
-    cd backend
-    npm install
-```
-Setup Environment Vaiables
-
-```Make .env file in "backend" folder and store environment Variables
-  JWT_SECRET=YOUR_SECRET_TEXT
-  SALT=YOUR_SALT_VALUE
-  MONGO_URL=YOUR_DATABASE_URL
-  STRIPE_SECRET_KEY=YOUR_KEY
- ```
-
-Setup the Frontend and Backend URL
-   - App.jsx in Admin folder
-      const url = YOUR_BACKEND_URL
-     
-  - StoreContext.js in Frontend folder
-      const url = YOUR_BACKEND_URL
-
-  - orderController in Backend folder
-      const frontend_url = YOUR_FRONTEND_URL 
-
-Start the Backend server
-
-```bash
-    nodemon server.js
+cd admin
+npm install
+npm run dev
 ```
 
-Start the Frontend server
+---
 
-```bash
-    npm run dev
+# 🔐 Environment Variables
+
+Create `.env` file inside **backend**
+
+Example:
+
+```
+JWT_SECRET=your_jwt_secret_key
+SALT=10
+MONGO_URL=your_mongodb_connection_string
+STRIPE_SECRET_KEY=your_stripe_secret_key
 ```
 
-Start the Backend server
+---
 
-```bash
-    npm run server
-```
-## Tech Stack
-* [React](https://reactjs.org/)
-* [Node.js](https://nodejs.org/en)
-* [Express.js](https://expressjs.com/)
-* [Mongodb](https://www.mongodb.com/)
-* [Stripe](https://stripe.com/)
-* [JWT-Authentication](https://jwt.io/introduction)
-* [Multer](https://www.npmjs.com/package/multer)
+# 🎯 Key Functionalities
 
-## Deployment
+✔ Authentication with JWT
+✔ Stripe payment integration
+✔ Coupon discount system
+✔ Cart synchronization
+✔ Admin order management
+✔ Secure backend APIs
 
-The application is deployed on Render.
+---
 
-## Contributing
+# 📈 Future Improvements
 
-Contributions are always welcome!
-Just raise an issue, and we will discuss it.
+* Real-time order tracking
+* Email notifications
+* Rating & reviews
+* Delivery partner module
+* Mobile responsive improvements
 
-<!-- ## Feedback
+---
 
-If you have any feedback, please reach out to me [here](https://www.linkedin.com/in/muhammad-shan-full-stack-developer/) -->
+# 👩‍💻 Author
+
+**Meghana Ponna**
+
+GitHub
+[https://github.com/MeghanaPonna](https://github.com/MeghanaPonna)
+
+---
+
+# ⭐ If you like this project
+
+Give the repository a ⭐ on GitHub!
