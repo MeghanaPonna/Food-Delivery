@@ -164,12 +164,12 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 
 # 🎯 Key Functionalities
 
-✔ Authentication with JWT
-✔ Stripe payment integration
-✔ Coupon discount system
-✔ Cart synchronization
-✔ Admin order management
-✔ Secure backend APIs
+* Authentication with JWT
+* Stripe payment integration
+* Coupon discount system
+* Cart synchronization
+* Admin order management
+* Secure backend APIs
 
 ---
 
